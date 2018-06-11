@@ -1,5 +1,5 @@
 const API_ENDPOINT = {
-    dev: 'http://localhost:8080',
+    dev: 'http://localhost:9000',
     prod: 'unknown'
 }
 

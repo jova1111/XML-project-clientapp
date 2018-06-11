@@ -3,14 +3,14 @@
         <div class="field">
         <label class="label">Имејл</label>
         <div class="control">
-            <input class="input" type="text" placeholder="Имејл...">
+            <input class="input" type="text" v-model="user.email" placeholder="Имејл...">
         </div>
         </div>
 
         <div class="field">
             <label class="label">Шифра</label>
             <div class="control">
-                <input class="input" type="password" placeholder="Шифра...">
+                <input class="input" type="password" v-model="user.password" placeholder="Шифра...">
             </div>
         </div>
 
@@ -20,18 +20,25 @@
 
 <script>
 import authService from "../services/auth-service";
+import User from "../model/user.js";
 
 export default {
     
 
     data() {
         return {
-
+            user: new User()
         }
     },
     methods: {
         submit() {
-            authService.login();
+            authService.login(this.user)
+                .then(response => {
+                    alert("Успешно сте се улоговали!");
+                })
+                .catch(error => {
+                    alert(error);
+                })
         }
     }
 }
