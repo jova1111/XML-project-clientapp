@@ -7,7 +7,7 @@
 
 <script>
 import home from './components/Home.vue';
-import navbar from './components/Navbar.vue';
+import navbar from './components/navbar/Navbar.vue';
 import router from './router.js';
 import 'bulma/css/bulma.css';
 import { getApiEndpoint } from './constants/index.js';

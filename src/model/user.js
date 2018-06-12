@@ -1,18 +1,18 @@
-export default class {
+import assign from 'lodash/assign';
+import cloneDeep from 'lodash/cloneDeep';
+
+const defaultAttributes = {
+    id: -1,
+    firstName: "Jova",
+    lastName: "",
+    email: "",
+    password: ""
+}
+
+export class User{
 
     constructor(json) {
-        if(!json) {
-            this.firstName = "";
-            this.lastName = "";
-            this.email = "";
-            this.password = "";
-        } else {
-            json = JSON.parse(json);
-            this.firstName = json.firstName;
-            this.lastName = json.lastName;
-            this.email = json.email;
-            this.password = json.password;
-        }
+        assign(this, cloneDeep(defaultAttributes), json);
     }
 
 }

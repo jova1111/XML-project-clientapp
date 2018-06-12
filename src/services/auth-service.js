@@ -39,10 +39,8 @@ export default {
     },
 
     register(user) {
-        const headers= { 'X-Requested-With': 'XMLHttpRequest', 
-                        'Content-Type': 'application/json' };
         return new Promise((resolve, reject) => {
-            axios.post(getApiEndpoint() + '/user', user, { headers: headers } ).then(
+            axios.post(getApiEndpoint() + '/user', user).then(
                 (success) => {
                     resolve('Успешно сте се регистровали.');
                 }, 

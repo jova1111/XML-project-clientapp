@@ -34,8 +34,8 @@
 
 
 <script>
-import User from '../model/user.js';
-import authService from '../services/auth-service.js'
+import { User } from '../../model/user.js';
+import authService from '../../services/auth-service.js'
 
 export default {
     

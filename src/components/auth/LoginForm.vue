@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import authService from "../services/auth-service";
-import User from "../model/user.js";
+import authService from "../../services/auth-service";
+import { User } from "../../model/user.js";
 
 export default {
     
@@ -32,6 +32,7 @@ export default {
     },
     methods: {
         submit() {
+            console.log(this.user);
             authService.login(this.user)
                 .then(response => {
                     alert("Успешно сте се улоговали!");
