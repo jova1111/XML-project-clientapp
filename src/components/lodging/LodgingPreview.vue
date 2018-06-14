@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Смештај у {{ lodging.place }}</h3>
+        <router-link :to="'/lodging/' + lodging.id"><h3>Смештај у {{ lodging.place }}</h3></router-link>
         <p>{{ lodging.description }}</p>
         <p>Цена: {{ lodging.price }}</p>
     </div>

@@ -1,27 +1,24 @@
 import assign from 'lodash/assign';
 import cloneDeep from 'lodash/cloneDeep';
 
-const defaultFields = {
+const defaultAttributes = {
+    id: "-1",
     place: "",
     guestNumber: 0,
     category: "",
     description: "",
-    occupance: false,
-    price: 0
+    occupancy: false,
+    price: 0,
+    fromDate: 0,
+    toDate: 0
 }
 
 export class Lodging {
 
     constructor(json) {
-        if(!json) {
-            assign(this, cloneDeep(defaultAttributes));
-        } else {
-            this.place = json.place;
-            this.guestNumber = json.guestNumber;
+        assign(this, cloneDeep(defaultAttributes), json);
+        if(json) {
             this.category = json.category.name;
-            this.description = json.description;
-            this.occupance = json.occupancy;
-            this.price = json.price;
         }
     }
 
