@@ -3,7 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 const defaultAttributes = {
     id: -1,
-    firstName: "Jova",
+    firstName: "",
     lastName: "",
     email: "",
     password: ""

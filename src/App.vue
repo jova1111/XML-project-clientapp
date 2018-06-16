@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <navbar></navbar>
-    <router-view></router-view>
+    <div class="router-view-container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -9,7 +11,6 @@
 import home from './components/Home.vue';
 import navbar from './components/navbar/Navbar.vue';
 import router from './router.js';
-import 'bulma/css/bulma.css';
 import { getApiEndpoint } from './constants/index.js';
 
 export default {
@@ -32,5 +33,10 @@ export default {
 
 <style>
 #app {
+  margin: 10px;
+}
+
+.router-view-container {
+  margin: 20px;
 }
 </style>

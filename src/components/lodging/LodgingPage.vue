@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Смештај у {{ lodging.place }}</h2>
+        <h2>Смештај у {{ lodging.location }}</h2>
         <p>Цена: {{ lodging.price }}</p>
         <p>Kaтегорија: {{ lodging.category }}</p>
         <p>Опис: {{ lodging.description }}</p>
@@ -35,3 +35,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    h2 {
+        font-size: 150%;
+    }
+
+</style>
