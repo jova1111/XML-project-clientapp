@@ -32,7 +32,6 @@ export default {
     },
     methods: {
         submit() {
-            console.log(this.user);
             authService.login(this.user)
                 .then(response => {
                     alert("Успешно сте се улоговали!");

@@ -9,8 +9,6 @@ const defaultAttributes = {
     description: "",
     occupancy: false,
     price: 0,
-    fromDate: 0,
-    toDate: 0,
     images: []
 }
 
@@ -19,8 +17,9 @@ export class Lodging {
     constructor(json) {
         assign(this, cloneDeep(defaultAttributes), json);
         if(json) {
-            this.category = json.category.name;
+            this.category = json.category.categoryName;
             this.images = json.imageUrls.map(el => el.url);
+            this.periods = json.periods.map(el => ({ dateFrom: el.dateFrom, dateTo: el.dateTo }))
         }
     }
 

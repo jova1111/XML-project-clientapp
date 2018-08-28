@@ -16,13 +16,13 @@
             </tr>
         </table>
         <p>Tип смештаја:</p>
-        <label v-bind:key="'type' + type.id" v-for="type in types"><input type="checkbox"   v-model="type.value">{{ type.name }}</label>
+        <label v-bind:key="'type' + type.id" v-for="type in types"><input type="checkbox"   v-model="type.value">{{ type.typeName }}</label>
 
         <p>Категорија:</p>
-        <label v-bind:key="'category' + category.id" v-for="category in categories"><input type="checkbox" v-model="category.value">{{ category.name }}</label>
+        <label v-bind:key="'category' + category.id" v-for="category in categories"><input type="checkbox" v-model="category.value">{{ category.categoryName }}</label>
 
         <p>Услуге:</p>
-        <label v-bind:key="'facility' + facility.id" v-for="facility in facilities"><input type="checkbox" v-model="facility.value">{{ facility.name }}</label>
+        <label v-bind:key="'facility' + facility.id" v-for="facility in facilities"><input type="checkbox" v-model="facility.value">{{ facility.facilityName }}</label>
 
         <input type="button" @click="search()" class="button is-info" value="Претражи">
     </div>
