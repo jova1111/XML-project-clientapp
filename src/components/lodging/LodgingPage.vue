@@ -2,13 +2,21 @@
     <div>
         <h2 class="title">Смештај у {{ lodging.location }}</h2>
         <p>Цена: {{ lodging.price }}</p>
-        <p>Kaтегорија: {{ lodging.category }}</p>
+        <p>Kaтегорија: {{ lodging.category.categoryName }}</p>
         <p>Опис: {{ lodging.description }}</p>
         <p>Максималан број особа: {{ lodging.guestNumber }}</p>
-        <h3 class="subtitle">Периоди:</h3>
+       <!-- <h3 class="subtitle">Периоди:</h3>
         <ul>
             <li v-bind:key="index" v-for="(period, index) in lodging.periods">Од {{ period.dateFrom | formattedDate }} до {{ period.dateTo | formattedDate }}</li>
-        </ul>
+        </ul> -->
+        <p>Период: од 
+        <select v-model ="selected">
+         <option v-for="option in lodging.periods" v-bind:value="option">
+             {{ option.dateFrom.substring(0,10) }} до {{ option.dateTo.substring(0,10) }}
+        </option>
+        </select>
+        </p>
+        <button class="button is-info" @click="reserv()" > Rezerviši </button>
     </div>
 
 </template>
@@ -16,6 +24,10 @@
 <script>
 import { Lodging } from '../../model/lodging.js';
 import lodgingService from '../../services/lodging-service.js';
+import reservationService from '../../services/reservation-service.js';
+import { Reservation } from '../../model/reservation.js';
+import { User } from '../../model/user.js';
+import authService from '../../services/auth-service.js';
 
 export default {
     props: [
@@ -31,7 +43,10 @@ export default {
     },
     data() {
         return {
-            lodging: new Lodging()
+            lodging: new Lodging(),
+            l: Object,
+            reservation: new Reservation(),
+            selected: ''
         }
     },
     created() {
@@ -42,6 +57,29 @@ export default {
             .catch((error) => {
                 alert(error);
             });
+    },
+    methods: {
+        reserv(){
+            
+            authService.getUser()
+                .then((response) => {
+                    this.reservation.lodging = this.lodging;
+                    this.reservation.period = this.selected;
+                    this.reservation.user = response;
+                    reservationService.reserv(this.reservation)
+                    .then(response => {
+                        alert(response);
+                     })
+                    .catch(error => {
+                        alert(error);
+                    });
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        }
+  
     }
+
 }
 </script>

@@ -17,9 +17,9 @@ export class Lodging {
     constructor(json) {
         assign(this, cloneDeep(defaultAttributes), json);
         if(json) {
-            this.category = json.category.categoryName;
+         //   this.category = json.category.categoryName;
             this.images = json.imageUrls.map(el => el.url);
-            this.periods = json.periods.map(el => ({ dateFrom: el.dateFrom, dateTo: el.dateTo }))
+         //   this.periods = json.periods.map(el => ({ dateFrom: el.dateFrom, dateTo: el.dateTo }))
         }
     }
 

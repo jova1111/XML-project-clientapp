@@ -48,6 +48,19 @@ export default {
                     reject(response.data);
                 })
         });
+    },
+    getUser() {
+        
+        let headers = {'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('token')).value}
+        return new Promise((resolve, reject) => {
+            axios.get(getApiEndpoint() + '/secure/getUser/', {headers : headers}).then(
+                ({data}) => {
+                    resolve(data);
+                }, 
+                ({ response }) => {
+                    reject(response.data);
+                })
+        });
     }
 
 }
