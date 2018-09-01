@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getApiEndpoint } from '../constants/index.js';
+import { Reservation } from '../model/reservation';
 
 export default {
     reserv(reservation) {
@@ -13,7 +14,6 @@ export default {
                 })
         });
     },
-
     get(){
         return new Promise((resolve,reject) => {
             let headers = {'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('token')).value}
