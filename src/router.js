@@ -1,9 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from './components/Home.vue';
-import LoginForm from './components/auth/LoginForm.vue';
-import RegisterForm from './components/auth/RegisterForm.vue';
-import LodgingPage from './components/lodging/LodgingPage.vue';
+import Home from './components/Home';
+import LoginForm from './components/auth/LoginForm';
+import RegisterForm from './components/auth/RegisterForm';
+import MessageForm from './components/messages/MessageForm';
+import Inbox from './components/messages/Inbox';
+import LodgingPage from './components/lodging/LodgingPage';
+
 
 Vue.use(VueRouter)
 
@@ -25,6 +28,14 @@ export default new VueRouter({
       path: '/lodging/:id',
       component: LodgingPage,
       props: true
+    },
+    {
+      path: '/message/:reservationId',
+      component: MessageForm
+    },
+    {
+      path: '/inbox',
+      component: Inbox
     }
   ]
 })

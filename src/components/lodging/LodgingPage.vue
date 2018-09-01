@@ -11,7 +11,7 @@
         </ul> -->
         <p>Период: од 
         <select v-model ="selected">
-         <option v-for="option in lodging.periods" v-bind:value="option">
+         <option v-bind:key="option.id" v-for="option in lodging.periods" v-bind:value="option">
              {{ option.dateFrom.substring(0,10) }} до {{ option.dateTo.substring(0,10) }}
         </option>
         </select>
@@ -44,7 +44,6 @@ export default {
     data() {
         return {
             lodging: new Lodging(),
-            l: Object,
             reservation: new Reservation(),
             selected: ''
         }
@@ -53,6 +52,7 @@ export default {
         lodgingService.get(this.id)
             .then((response) => {
                 this.lodging = response;
+                console.log(this.lodging)
             })
             .catch((error) => {
                 alert(error);

@@ -61,6 +61,11 @@ export default {
                     reject(response.data);
                 })
         });
+    },
+    logout() {
+        localStorage.removeItem('token');
+        router.push('/');
+        window.location.reload();
     }
 
 }
