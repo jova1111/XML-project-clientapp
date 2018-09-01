@@ -4,6 +4,7 @@ import Home from './components/Home.vue';
 import LoginForm from './components/auth/LoginForm.vue';
 import RegisterForm from './components/auth/RegisterForm.vue';
 import LodgingPage from './components/lodging/LodgingPage.vue';
+import UserPage from './components/UserPage.vue';
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,10 @@ export default new VueRouter({
       path: '/lodging/:id',
       component: LodgingPage,
       props: true
+    },
+    {
+      path: '/reservations',
+      component: UserPage
     }
   ]
 })

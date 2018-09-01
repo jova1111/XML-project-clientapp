@@ -44,7 +44,6 @@ export default {
     data() {
         return {
             lodging: new Lodging(),
-            l: Object,
             reservation: new Reservation(),
             selected: ''
         }

@@ -12,6 +12,19 @@ export default {
                     reject(response.data);
                 })
         });
+    },
+
+    get(){
+        return new Promise((resolve,reject) => {
+            let headers = {'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('token')).value}
+            axios.get(getApiEndpoint() + '/secure/reservations', {headers : headers}).then(
+                ({data}) => {
+                    resolve(data);
+                },
+                ({ response }) =>{
+                    reject(response.data);
+                })
+        });
     }
 
 }
