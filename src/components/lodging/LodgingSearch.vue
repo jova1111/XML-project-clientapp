@@ -22,7 +22,7 @@
         <label v-bind:key="'category' + category.id" v-for="category in categories"><input type="checkbox" v-model="category.value">{{ category.categoryName }}</label>
 
         <p>Услуге:</p>
-        <label v-bind:key="'facility' + facility.id" v-for="facility in facilities"><input type="checkbox" v-model="facility.value">{{ facility.facilityName }}</label>
+        <label v-bind:key="'facility' + facility.id" v-for="facility in facilities"><input type="checkbox" v-model="facility.value">{{ facility.name }}</label>
 
         <input type="button" @click="search()" class="button is-info" value="Претражи">
     </div>
@@ -66,7 +66,7 @@ export default {
                 return;
             }
             this.$emit('search-started');
-            let query= { 
+            let query = { 
                 city: this.city, 
                 startDate: this.startDate, 
                 endDate: this.endDate, 
@@ -76,7 +76,6 @@ export default {
             };
             lodgingService.search(query)
                 .then(response => {
-                    console.log("dobio iz servisa")
                     this.$emit('search-over', response);
                 });
         }

@@ -14,32 +14,46 @@
             </div>
         </div>
 
-        <input type="button" class="button is-info" @click="submit()" value="Posalji">
+        <input type="button" class="button is-info" @click="send()" value="Posalji">
     </form>
 </template>
 
 <script>
     import { Message } from '../../model/message';
     import reservationService from '../../services/reservation-service';
+    import messageService from '../../services/message-service';
 
     export default {
         data() {
             return {
                 isLoaded: false,
                 message: new Message(),
-                reservation: {}
             }
         },
         mounted: function() {
             reservationService.get(this.$route.params.reservationId)
                 .then(response => {
                     this.message.reservation = response;
-                    console.log(this.message)
                     this.isLoaded = true;
+                    console.log(this.message.reservation)
                 })
                 .catch(error => {
                     console.log(error);
                 })
+        },
+        methods: {
+            send() {
+                this.isLoaded = false;
+                messageService.sendToAgent(this.message, this.message.reservation.lodging.agent.id)
+                    .then(response => {
+                        alert("Poruka uspesno poslata!");
+                        this.$router.push('/');
+                    })
+                    .catch(error => {
+                        alert(error);
+                        this.isLoaded = true;
+                    });
+            }
         }
     }
 </script>
