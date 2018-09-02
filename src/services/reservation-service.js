@@ -14,16 +14,14 @@ export default {
                 })
         });
     },
-
-    get(id) {
-        return new Promise((resolve, reject) => {
-            let headers = { 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token')).value };
-            axios.get(getApiEndpoint() + '/secure/reservations/' + id, { headers: headers }).then(
-                ({ data }) => {
-                    resolve(new Reservation(data));
-                }, 
-                ({ response }) => {
-                    console.log(response)
+    get(){
+        return new Promise((resolve,reject) => {
+            let headers = {'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('token')).value}
+            axios.get(getApiEndpoint() + '/secure/reservations', {headers : headers}).then(
+                ({data}) => {
+                    resolve(data);
+                },
+                ({ response }) =>{
                     reject(response.data);
                 })
         });
