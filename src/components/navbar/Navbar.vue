@@ -28,7 +28,7 @@ export default {
     methods: {
         logout: function() {
                 authService.logout();
-            },
+            }
     }
 }
 </script>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getApiEndpoint } from '../constants/index.js';
+import router from '../router';
 
 export default {
     login(user) {

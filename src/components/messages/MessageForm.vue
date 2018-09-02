@@ -1,5 +1,6 @@
 <template>
-    <form v-if="isLoaded">
+    <spinner v-if="!isLoaded"></spinner>
+    <form v-else>
         <div class="field">
         <label class="label">Rezervacija za</label>
         <div class="control">
@@ -22,8 +23,12 @@
     import { Message } from '../../model/message';
     import reservationService from '../../services/reservation-service';
     import messageService from '../../services/message-service';
+    import LoadingSpinner from '../indicators/LoadingSpinner.vue';
 
     export default {
+        components: {
+            'spinner': LoadingSpinner
+        },
         data() {
             return {
                 isLoaded: false,

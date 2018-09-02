@@ -3,6 +3,18 @@ const API_ENDPOINT = {
     prod: 'unknown'
 }
 
-export function getApiEndpoint() {
+
+const lockedPagesForGuest = [
+    '/message',
+    '/inbox'
+]
+const lockedPagesForUser = [
+    '/login',
+    '/register'
+]
+
+function getApiEndpoint() {
     return API_ENDPOINT[ENVIRONMENT];
 }
+
+export { getApiEndpoint, lockedPagesForGuest, lockedPagesForUser };

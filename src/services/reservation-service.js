@@ -14,10 +14,22 @@ export default {
                 })
         });
     },
-    get(){
+    getAll(){
         return new Promise((resolve,reject) => {
             let headers = {'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('token')).value}
-            axios.get(getApiEndpoint() + '/secure/reservations', {headers : headers}).then(
+            axios.get(getApiEndpoint() + '/secure/reservations/', {headers : headers}).then(
+                ({data}) => {
+                    resolve(data);
+                },
+                ({ response }) =>{
+                    reject(response.data);
+                })
+        });
+    },
+    get(id){
+        return new Promise((resolve,reject) => {
+            let headers = {'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('token')).value}
+            axios.get(getApiEndpoint() + '/secure/reservations/' + id, {headers : headers}).then(
                 ({data}) => {
                     resolve(data);
                 },

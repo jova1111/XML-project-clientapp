@@ -1,57 +1,58 @@
 <template>
     <div>
-      <!--  <reservations-list v-if="!isReservations" :reservations="reservations"></reservations-list> -->
-            <h1>Sve vaše rezervacije</h1>
-            <div v-for="reservation in reservations">
-               <h3>Smeštaj {{ reservation.lodging.location }}</h3>
-                <p>Opis: {{ reservation.lodging.description }}</p>
-                <p>Cena: {{ reservation.lodging.price }}</p>
-                <p>Period: {{ reservation.period.dateFrom.substring(0,10)}} do {{ reservation.period.dateTo.substring(0,10)}}</p>
-                <hr>
-            </div>
+        <spinner v-if="!isReservations"></spinner>
+        <div v-else>
+        <!--  <reservations-list v-if="!isReservations" :reservations="reservations"></reservations-list> -->
+                <h1>Sve vaše rezervacije</h1>
+                <div v-bind:key="reservation.id" v-for="reservation in reservations">
+                <h3>Smeštaj {{ reservation.lodging.location }}</h3>
+                    <p>Opis: {{ reservation.lodging.description }}</p>
+                    <p>Cena: {{ reservation.lodging.price }}</p>
+                    <p>Period: {{ reservation.period.dateFrom.substring(0,10)}} do {{ reservation.period.dateTo.substring(0,10)}}</p>
+                    <router-link :to="'/message/' + reservation.id" tag="button" class="button">Posalji poruku</router-link>
+                    <hr>
+                </div>
+        </div>
     </div>
 </template>
 
 <script>
-import LoadingSpinner from './indicators/LoadingSpinner.vue';
-import reservationService from '../services/reservation-service.js';
-//import ReservationList from './reservations/ReservationsList.vue';
-import authService from '../services/auth-service.js';
+    import LoadingSpinner from './indicators/LoadingSpinner.vue';
+    import reservationService from '../services/reservation-service.js';
+    //import ReservationList from './reservations/ReservationsList.vue';
+    import authService from '../services/auth-service.js';
 
 
-export default {
-    name: "userPage",
-  
-    components: {
-        "spinner": LoadingSpinner,
-   //     "reservations-list": ReservationList
-    },
+    export default {
+        name: "userPage",
+    
+        components: {
+            "spinner": LoadingSpinner,
+    //     "reservations-list": ReservationList
+        },
 
-    data() {
-        return {
-            reservations: [],
-            isReservations: false,
+        data() {
+            return {
+                reservations: [],
+                isReservations: false,
+            }
+        },
 
-        }
-    },
+        methods: {
+        },
 
-    methods: {
-    },
-
-    created() {
-            
-                reservationService.get()
+        created() {     
+            reservationService.getAll()
                 .then(  data => {
                     console.log(data);
                     this.reservations = data;
-                    this.isReservations = false;
+                    this.isReservations = true;
                 })
                 .catch(error => {
                     alert(error);
-                });
-        
+                });   
         }
-        
+            
     }
 </script>
 <style scoped>

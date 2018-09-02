@@ -34,7 +34,8 @@ export default {
         submit() {
             authService.login(this.user)
                 .then(response => {
-                    alert("Успешно сте се улоговали!");
+                    this.$router.push('/');
+                    window.location.reload();
                 })
                 .catch(error => {
                     alert(error);

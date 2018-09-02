@@ -1,6 +1,6 @@
 <template>
     <div>
-        <reservations-preview v-bind:key="reservations.id" v-for="reservation in reservations" : reservation="reservation"></reservations-preview> 
+        <reservations-preview v-bind:key="reservation.id" v-for="reservation in reservations" : reservation="reservation"></reservations-preview> 
     </div>
 </template>
 
