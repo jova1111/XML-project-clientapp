@@ -63,6 +63,7 @@ export default {
                     this.reservation.lodging = this.lodging;
                     this.reservation.period = this.selected;
                     this.reservation.user = response;
+                    this.reservation.activated = false;
                     reservationService.reserv(this.reservation)
                     .then(response => {
                         alert(response);

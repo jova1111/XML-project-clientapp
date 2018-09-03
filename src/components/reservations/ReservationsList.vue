@@ -1,6 +1,6 @@
 <template>
     <div>
-        <reservations-preview v-bind:key="reservation.id" v-for="reservation in reservations" : reservation="reservation"></reservations-preview> 
+        <reservations-preview v-bind:key="reservation.id" v-for="reservation in reservations" :reservation="reservation"></reservations-preview> 
     </div>
 </template>
 
@@ -22,9 +22,8 @@ export default {
             
         }
     },
-
-    mounted() {
-
+    mounted: function() {
+        console.log("mountovan")
     }
 }
 </script>

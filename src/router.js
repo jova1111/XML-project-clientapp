@@ -6,6 +6,7 @@ import LoginForm from './components/auth/LoginForm';
 import RegisterForm from './components/auth/RegisterForm';
 import MessageForm from './components/messages/MessageForm';
 import Inbox from './components/messages/Inbox';
+import CommentForm from './components/comments/CommentForm';
 import LodgingPage from './components/lodging/LodgingPage';
 import UserPage from './components/UserPage';
 import authService from './services/auth-service';
@@ -46,6 +47,10 @@ const router = new VueRouter({
     {
       path: '/inbox',
       component: Inbox
+    },
+    {
+      path: '/comment/:reservationId',
+      component: CommentForm
     }
   ]
 })

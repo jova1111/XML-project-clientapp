@@ -4,7 +4,7 @@
         <div class="field">
         <label class="label">Rezervacija za</label>
         <div class="control">
-            <input disabled class="input" type="text" v-model="message.reservation.lodging.naziv">
+            <input disabled class="input" type="text" v-model="message.reservation.lodging.name">
         </div>
         </div>
 
@@ -49,7 +49,7 @@
         methods: {
             send() {
                 this.isLoaded = false;
-                messageService.sendToAgent(this.message, this.message.reservation.lodging.agent.id)
+                messageService.sendToAgent(this.message, this.message.reservation.lodging.agent.businessId)
                     .then(response => {
                         alert("Poruka uspesno poslata!");
                         this.$router.push('/');

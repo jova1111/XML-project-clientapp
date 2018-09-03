@@ -10,6 +10,7 @@ export default {
                     resolve('Poslali ste zahtev za rezervaciju.');
                 }, 
                 ({ response }) => {
+                    console.log(response)
                     reject(response.data);
                 })
         });
@@ -40,12 +41,12 @@ export default {
     },
     del(id){
         return new Promise((resolve,reject) => {
-            axios.delete(getApiEndpoint()+ '/delreservation/'+id).then(
+            axios.delete(getApiEndpoint() + '/delreservation/' + id).then(
                 (success)=> {
                     resolve(success.data);
                 },
                 ({response}) =>{
-                    reject(response.data)
+                    reject(response.data);
                 })
         });
     }

@@ -1,26 +1,16 @@
 <template>
     <div>
         <spinner v-if="!isReservations"></spinner>
-        <div v-else>
-        <!--  <reservations-list v-if="!isReservations" :reservations="reservations"></reservations-list> -->
-                <h1>Sve vaše rezervacije</h1>
-                <div v-bind:key="reservation.id" v-for="reservation in reservations">
-                <h3>Smeštaj {{ reservation.lodging.location }}</h3>
-                    <p>Opis: {{ reservation.lodging.description }}</p>
-                    <p>Cena: {{ reservation.lodging.price }}</p>
-                    <p>Period: {{ reservation.period.dateFrom.substring(0,10)}} do {{ reservation.period.dateTo.substring(0,10)}}</p>
-                    <router-link :to="'/message/' + reservation.id" tag="button" class="button">Posalji poruku</router-link>
-                    <button class="button is-info" @click="delRes(reservation.id)" > Otkaži </button>
-                    <hr>
-                </div>
-        </div>
+        <reservations-list v-else :reservations="reservations"></reservations-list>   
     </div>
 </template>
 
 <script>
-    import LoadingSpinner from './indicators/LoadingSpinner.vue';
-    import reservationService from '../services/reservation-service.js';
-    import authService from '../services/auth-service.js';
+    import LoadingSpinner from './indicators/LoadingSpinner';
+    import reservationService from '../services/reservation-service';
+    import authService from '../services/auth-service';
+    import messageService from '../services/message-service';
+    import ReservationList from './reservations/ReservationsList';
 
 
     export default {
@@ -28,26 +18,19 @@
     
         components: {
             "spinner": LoadingSpinner,
+            'reservations-list': ReservationList
         },
 
         data() {
             return {
                 reservations: [],
                 isReservations: false,
+                isRated: false
             }
         },
-
         methods: {  
-                delRes(id){
-                reservationService.del(id).then((response) => {
-                alert("Rezervacija je otkazana");
-            })
-            .catch((error) => {
-                alert(error);
-            });
-            }
+              
         },
-
         created() {     
             reservationService.getAll()
                 .then(  data => {

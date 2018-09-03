@@ -39,7 +39,7 @@
                 .then(response => {
                     this.receivedMessages = response;
                     this.isLoaded = true;
-                    console.log(this.messages)
+                    console.log(this.receivedMessages)
                 })
                 .catch(error => {
                     alert(error);
