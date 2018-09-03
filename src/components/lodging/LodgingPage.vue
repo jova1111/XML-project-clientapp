@@ -5,13 +5,10 @@
         <p>Kaтегорија: {{ lodging.category.categoryName }}</p>
         <p>Опис: {{ lodging.description }}</p>
         <p>Максималан број особа: {{ lodging.guestNumber }}</p>
-       <!-- <h3 class="subtitle">Периоди:</h3>
-        <ul>
-            <li v-bind:key="index" v-for="(period, index) in lodging.periods">Од {{ period.dateFrom | formattedDate }} до {{ period.dateTo | formattedDate }}</li>
-        </ul> -->
         <p>Период: од 
         <select v-model ="selected">
-         <option v-bind:key="option.id" v-for="option in lodging.periods" v-bind:value="option">
+         <option v-bind:key="option.id" v-for="option in lodging.periods" v-bind:value="option" 
+         v-if="!option.reserved">
              {{ option.dateFrom.substring(0,10) }} до {{ option.dateTo.substring(0,10) }}
         </option>
         </select>
@@ -60,7 +57,7 @@ export default {
     },
     methods: {
         reserv(){
-            
+            if(authService.isAuthenticated()){
             authService.getUser()
                 .then((response) => {
                     this.reservation.lodging = this.lodging;
@@ -77,6 +74,10 @@ export default {
                 .catch((error) => {
                     alert(error);
                 });
+            }else{
+                alert("Morate se ulogovati da bi ste izvršili rezervaciju");
+                this.$router.push('/login');
+            }
         }
   
     }

@@ -10,6 +10,7 @@
                     <p>Cena: {{ reservation.lodging.price }}</p>
                     <p>Period: {{ reservation.period.dateFrom.substring(0,10)}} do {{ reservation.period.dateTo.substring(0,10)}}</p>
                     <router-link :to="'/message/' + reservation.id" tag="button" class="button">Posalji poruku</router-link>
+                    <button class="button is-info" @click="delRes(reservation.id)" > Otkaži </button>
                     <hr>
                 </div>
         </div>
@@ -19,7 +20,6 @@
 <script>
     import LoadingSpinner from './indicators/LoadingSpinner.vue';
     import reservationService from '../services/reservation-service.js';
-    //import ReservationList from './reservations/ReservationsList.vue';
     import authService from '../services/auth-service.js';
 
 
@@ -28,7 +28,6 @@
     
         components: {
             "spinner": LoadingSpinner,
-    //     "reservations-list": ReservationList
         },
 
         data() {
@@ -38,7 +37,15 @@
             }
         },
 
-        methods: {
+        methods: {  
+                delRes(id){
+                reservationService.del(id).then((response) => {
+                alert("Rezervacija je otkazana");
+            })
+            .catch((error) => {
+                alert(error);
+            });
+            }
         },
 
         created() {     

@@ -5,7 +5,7 @@ import { Reservation } from '../model/reservation';
 export default {
     reserv(reservation) {
         return new Promise((resolve, reject) => {
-            axios.post(getApiEndpoint() + '/newReservation', reservation).then(
+            axios.post(getApiEndpoint() + '/newreservation', reservation).then(
                 (success) => {
                     resolve('Poslali ste zahtev za rezervaciju.');
                 }, 
@@ -35,6 +35,17 @@ export default {
                 },
                 ({ response }) =>{
                     reject(response.data);
+                })
+        });
+    },
+    del(id){
+        return new Promise((resolve,reject) => {
+            axios.delete(getApiEndpoint()+ '/delreservation/'+id).then(
+                (success)=> {
+                    resolve(success.data);
+                },
+                ({response}) =>{
+                    reject(response.data)
                 })
         });
     }
