@@ -13,6 +13,7 @@
 
 <script>
     import commentService from '../../services/comment-service';
+    import reservationService from '../../services/reservation-service.js';
 
     export default {
         props: [

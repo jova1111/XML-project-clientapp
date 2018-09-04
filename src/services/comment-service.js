@@ -10,6 +10,7 @@ export default {
                 publisherEmail: comment.user.email,
                 rating: comment.rating
             }
+            console.log(data);
             axios.post('http://localhost:8010/cloud-rating/us-central1/addRating', data)
                 .then(({ data }) => {
                     resolve(data);
@@ -34,6 +35,18 @@ export default {
                     reject(response.data);
                 });
 
+        });
+    },
+    getMy(lodgingId){
+        return new Promise((resolve,reject) => {
+            axios.get(getApiEndpoint() + '/comments/' + lodgingId)
+            .then(({data}) =>{
+                resolve(data);
+                console.log(data);
+            })
+            .catch(({ response }) => {
+                    reject(response.data);
+                });
         });
     }
 }
