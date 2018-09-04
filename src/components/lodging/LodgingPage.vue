@@ -6,6 +6,7 @@
         <p>Kategorija: {{ lodging.category.categoryName }}</p>
         <p>Opis: {{ lodging.description }}</p>
         <p>Maksimalan broj osoba: {{ lodging.guestNumber }}</p>
+        <p>Ocena: {{ this.sum }} </p>
         <p>Period: od 
         <select v-model ="selected">
          <option v-bind:key="option.id" v-for="option in lodging.periods" v-bind:value="option" 
@@ -19,14 +20,17 @@
               <img class="preview-image" :src="srcsi">
         </div>
         <button class="button is-info" @click="showComment()" > ... </button>
+        <br>
+        <br>
         <div v-if="isActive">
         <p>Komentari:</p>
+        <br>
         <div v-for="comment in comments" v-bind:value="comment" v-if="comment.approved">
-            <p> {{ comment.content }}
+            <p> {{ comment.content }} &nbsp; &nbsp;   {{ comment.rating }}
             <hr/>
             </p>
         </div>
-        </div>
+    </div>
     </div>
 
 </template>
@@ -58,13 +62,15 @@ export default {
             reservation: new Reservation(),
             selected: '',
             comments: [],
-            isActive: false
+            isActive: false,
+            sum: 0
         }
     },
     created() {
         lodgingService.get(this.id)
             .then((response) => {
                 this.lodging = response;
+                this.Comment();
                 console.log(this.lodging)
             })
             .catch((error) => {
@@ -99,12 +105,19 @@ export default {
             }
         },
         showComment(){
+
             this.isActive = !this.isActive;
-             commentService.getMy(this.id).then((response) => {
+         }, 
+        Comment(){
+            commentService.getMy(this.id).then((response) => {
             this.comments = response;
+            
+              for(var i = 0; i <= this.comments.length; i++){
+                    this.sum = this.sum + this.comments[i].rating;
+              }
            })
             .catch((error) => {
-            alert(error);
+                //alert(error);
              });
         }
 
